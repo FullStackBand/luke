@@ -1,0 +1,24 @@
+![](https://upload-images.jianshu.io/upload_images/13055171-d24115443326712c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+#一、ProcessEngine 流程引擎
+1. EngineServers：该接口定义了获取各种服务类实例对象的方法。
+2. ProcessEngine：继承EngineServers接口，并增加了对流程引擎名称的获取以及关闭。
+3. ProcessEngineImplement：对ProcessEngine接口中定义的方法实现。
+4. ProcessEngines：该类负责管理所有的引擎ProcessEngine的集合，并负责流程引擎实例对象的注册、获取、注销等操作。
+5. PricwssEngineConfiguration：该抽象类实现接口EngineServer，提供了一系列创建流程引擎配置类ProcessEngineConfigureaction实例对象的方法
+6. ProcessEngineConfigurationImpl：该抽象类继承PricwssEngineConfiguration，负责创建一系列服务类实例对象、流程引擎实例对象以及ProcessEngineImpl类实例对象。该类可以通过流程配置文件交给Spring容器管理或者使用编程方式动态构造。
+7. SpringProcessEngineConfiguration：主要用于整合Spring框架时使用，提供了几个重要的功能：
+    * 创建流程引擎实例对象；
+    * 流程引擎启动之后自动部署配置的流程文档（需要配置）
+    * 设置流程引擎连接的数据源、事务管理器等
+8. StandaloneProcessEngineConfigueration：标准的流程引擎配置类。
+9. MultiSchemaMultiTenantProcessEngineConfiguration：“多数据库多租户”流程引擎配置类，Activiti通过此类为开发人员提供了自动路由机制，这样当流程引擎需要连接对各数据库进行操作时，客户端无需关心引擎到底连接的是哪个数据库，该类通过路由规则自动选择需要自动操作的数据库，数据库的操作对客户端来说是透明的，客户端无需关心其内部路由的实现机制。
+10. JtaProcessEnginConfiguration：故名自已，通过类名也知道该类支持JTA（Java Transaction API）
+11. StandaloneInMenProcessEngineConfiguration：该类通常可以在开发环境中自测使用，默认采用H2数据可存储数据
+#二、EngineServer 提供了一下服务
+1. RepositoryServer：操作流程定义的方法。
+2. Runtime：操作流程实例的方法。
+3. FormServer：操作流程表单的方法。
+4. TaskServer：操作任务的方法，例如（任务的完成、挂起、激活、添加处理人、认领、删除等操作）
+5. HistoryServer：查询历史流程实例、历史变量、历史任务的方法
+6. IdentityServer：操作用户或者用户组的方法。
+7. ManagementServer：查询数据库表中的数据、表的元数据以及命令等方法。
